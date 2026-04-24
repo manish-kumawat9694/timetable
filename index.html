@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Examination Timetable</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --card: #1c2330;
+    --border: #30363d;
+    --gold: #e6b84a;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --maths:   #4f9cf9;
+    --edc:     #3fb68b;
+    --electro: #9b72f2;
+    --quantum: #f06b6b;
+    --thermal: #f59e42;
+    --stellar: #52d9e0;
+    --flight:  #e05cbb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 5%,  rgba(79,156,249,0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 40% at 85% 95%, rgba(155,114,242,0.08) 0%, transparent 65%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .wrapper { max-width: 980px; margin: 0 auto; position: relative; z-index: 1; }
+
+  header {
+    text-align: center; margin-bottom: 44px;
+    animation: fadeDown 0.6s ease both;
+  }
+  .label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px; font-weight: 500;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 5vw, 50px); font-weight: 700; line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  h1 span { color: var(--gold); }
+  header p { color: var(--muted); font-size: 14px; font-weight: 300; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center; margin-bottom: 40px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 7px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 5px 13px;
+    font-size: 12px; font-weight: 500;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  .month-block { margin-bottom: 44px; animation: fadeUp 0.6s ease both; }
+  .month-block:nth-child(1) { animation-delay: 0.2s; }
+  .month-block:nth-child(2) { animation-delay: 0.35s; }
+
+  .month-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+  }
+  .month-name { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; }
+  .month-year {
+    font-size: 12px; color: var(--gold); font-weight: 500;
+    background: rgba(230,184,74,0.1); border: 1px solid rgba(230,184,74,0.25);
+    padding: 3px 10px; border-radius: 12px; letter-spacing: 1px;
+  }
+  .month-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--border), transparent); }
+
+  .calendar {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+  }
+  .cal-header {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    background: var(--card); border-bottom: 1px solid var(--border);
+  }
+  .cal-header div {
+    text-align: center; padding: 11px 4px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); font-weight: 500;
+  }
+  .cal-header div:first-child,
+  .cal-header div:last-child { color: rgba(230,184,74,0.55); }
+
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+
+  .cal-day {
+    min-height: 86px; border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border); padding: 8px 6px;
+    transition: background 0.2s;
+  }
+  .cal-day:nth-child(7n) { border-right: none; }
+  .cal-day:hover { background: rgba(255,255,255,0.02); }
+  .cal-day.empty { background: rgba(0,0,0,0.15); }
+  .cal-day.weekend .day-num { color: rgba(230,184,74,0.5); }
+  .cal-day.exam-day { background: rgba(255,255,255,0.025); }
+
+  .day-num {
+    font-size: 12px; font-weight: 500; color: var(--muted);
+    margin-bottom: 5px; line-height: 1;
+  }
+  .cal-day.today .day-num {
+    background: var(--gold); color: #000;
+    width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 11px;
+  }
+
+  .event {
+    border-radius: 5px; padding: 3px 6px;
+    font-size: 10px; font-weight: 600; margin-top: 3px;
+    line-height: 1.35; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+    transition: filter 0.2s; cursor: default;
+  }
+  .event:hover { filter: brightness(1.2); }
+
+  .ev-maths    { background: rgba(79,156,249,0.18);  color: #7ab8fb; border-left: 2px solid var(--maths); }
+  .ev-edc      { background: rgba(63,182,139,0.18);  color: #5dd4a6; border-left: 2px solid var(--edc); }
+  .ev-electro  { background: rgba(155,114,242,0.18); color: #b99cf5; border-left: 2px solid var(--electro); }
+  .ev-quantum  { background: rgba(240,107,107,0.18); color: #f49595; border-left: 2px solid var(--quantum); }
+  .ev-thermal  { background: rgba(245,158,66,0.18);  color: #f8be7a; border-left: 2px solid var(--thermal); }
+  .ev-stellar  { background: rgba(82,217,224,0.18);  color: #82e6ec; border-left: 2px solid var(--stellar); }
+  .ev-flight   { background: rgba(224,92,187,0.18);  color: #ea8fd3; border-left: 2px solid var(--flight); }
+
+  .exams-section { margin-top: 48px; animation: fadeUp 0.6s 0.5s ease both; }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: 20px;
+    margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  .exam-cards {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+  }
+
+  .exam-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px 18px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .exam-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+  .exam-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.1); }
+
+  .exam-card.maths::before   { background: var(--maths); }
+  .exam-card.edc::before     { background: var(--edc); }
+  .exam-card.electro::before { background: var(--electro); }
+  .exam-card.quantum::before { background: var(--quantum); }
+  .exam-card.thermal::before { background: var(--thermal); }
+  .exam-card.stellar::before { background: var(--stellar); }
+  .exam-card.flight::before  { background: var(--flight); }
+
+  .card-date-badge {
+    min-width: 46px; text-align: center;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 6px 8px;
+  }
+  .badge-day   { font-size: 20px; font-weight: 700; line-height: 1; color: var(--text); }
+  .badge-month { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-top: 2px; }
+
+  .card-info { flex: 1; }
+  .card-subject { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .card-sub     { font-size: 11px; color: var(--muted); }
+
+  .countdown {
+    display: inline-flex; align-items: center;
+    background: rgba(230,184,74,0.1); border: 1px solid rgba(230,184,74,0.2);
+    border-radius: 20px; padding: 2px 9px;
+    font-size: 11px; color: var(--gold); font-weight: 600;
+    margin-top: 5px;
+  }
+  .countdown.past { background: rgba(255,255,255,0.05); border-color: var(--border); color: var(--muted); }
+  .countdown.soon { background: rgba(240,107,107,0.15); border-color: rgba(240,107,107,0.3); color: #f49595; }
+
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-18px); } to { opacity:1; transform:none; } }
+  @keyframes fadeUp   { from { opacity:0; transform:translateY(14px);  } to { opacity:1; transform:none; } }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="label">Examination Schedule · 2026</div>
+    <h1>Your Exam <span>Timetable</span></h1>
+    <p>April 29 – May 9, 2026</p>
+  </header>
+
+  <div class="legend">
+    <div class="legend-item"><span class="dot" style="background:var(--maths)"></span>Maths · Apr 29</div>
+    <div class="legend-item"><span class="dot" style="background:var(--edc)"></span>EDC · Apr 30</div>
+    <div class="legend-item"><span class="dot" style="background:var(--electro)"></span>Electrodynamics · May 4</div>
+    <div class="legend-item"><span class="dot" style="background:var(--quantum)"></span>Quantum Mech · May 6</div>
+    <div class="legend-item"><span class="dot" style="background:var(--thermal)"></span>Thermal Physics · May 7</div>
+    <div class="legend-item"><span class="dot" style="background:var(--stellar)"></span>Stellar · May 8</div>
+    <div class="legend-item"><span class="dot" style="background:var(--flight)"></span>Flight · May 9</div>
+  </div>
+
+  <div class="month-block">
+    <div class="month-header">
+      <span class="month-name">April</span>
+      <span class="month-year">2026</span>
+      <div class="month-line"></div>
+    </div>
+    <div class="calendar">
+      <div class="cal-header">
+        <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
+      </div>
+      <div class="cal-grid" id="april-grid"></div>
+    </div>
+  </div>
+
+  <div class="month-block">
+    <div class="month-header">
+      <span class="month-name">May</span>
+      <span class="month-year">2026</span>
+      <div class="month-line"></div>
+    </div>
+    <div class="calendar">
+      <div class="cal-header">
+        <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
+      </div>
+      <div class="cal-grid" id="may-grid"></div>
+    </div>
+  </div>
+
+  <div class="exams-section">
+    <div class="section-title">Exam Details</div>
+    <div class="exam-cards" id="exam-cards"></div>
+  </div>
+
+</div>
+<script>
+  const exams = [
+    { date: new Date(2026,3,29), day:29, month:'APR', subject:'Mathematics',       code:'maths',   icon:'📐' },
+    { date: new Date(2026,3,30), day:30, month:'APR', subject:'EDC',               code:'edc',     icon:'⚡' },
+    { date: new Date(2026,4, 4), day:4,  month:'MAY', subject:'Electrodynamics',   code:'electro', icon:'🔬' },
+    { date: new Date(2026,4, 6), day:6,  month:'MAY', subject:'Quantum Mechanics', code:'quantum', icon:'⚛️' },
+    { date: new Date(2026,4, 7), day:7,  month:'MAY', subject:'Thermal Physics',   code:'thermal', icon:'🌡️' },
+    { date: new Date(2026,4, 8), day:8,  month:'MAY', subject:'Stellar',           code:'stellar', icon:'🌟' },
+    { date: new Date(2026,4, 9), day:9,  month:'MAY', subject:'Flight',            code:'flight',  icon:'✈️' },
+  ];
+
+  const aprilEv = { 29: exams[0], 30: exams[1] };
+  const mayEv   = { 4: exams[2], 6: exams[3], 7: exams[4], 8: exams[5], 9: exams[6] };
+  const today   = new Date(2026, 3, 24);
+
+  function buildMonth(gridId, year, month, startDow, daysInMonth, evMap) {
+    const grid = document.getElementById(gridId);
+    let html = '';
+    for (let i = 0; i < startDow; i++) html += '<div class="cal-day empty"></div>';
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dow = (startDow + d - 1) % 7;
+      const isWeekend = dow === 0 || dow === 6;
+      const isToday = (year === 2026 && month === 3 && d === 24);
+      const hasExam = !!evMap[d];
+      let cls = 'cal-day';
+      if (isWeekend) cls += ' weekend';
+      if (isToday)   cls += ' today';
+      if (hasExam)   cls += ' exam-day';
+      html += `<div class="${cls}"><div class="day-num">${d}</div>`;
+      if (hasExam) {
+        const ev = evMap[d];
+        html += `<div class="event ev-${ev.code}">${ev.icon} ${ev.subject}</div>`;
+      }
+      html += '</div>';
+    }
+    grid.innerHTML = html;
+  }
+
+  buildMonth('april-grid', 2026, 3, 3, 30, aprilEv);
+  buildMonth('may-grid',   2026, 4, 5, 31, mayEv);
+
+  const container = document.getElementById('exam-cards');
+  exams.forEach(ex => {
+    const diff = Math.ceil((ex.date - today) / 86400000);
+    let pill = '';
+    if (diff > 0 && diff <= 5) pill = `<div class="countdown soon">In ${diff} day${diff===1?'':'s'} ⚠️</div>`;
+    else if (diff > 5)         pill = `<div class="countdown">In ${diff} days</div>`;
+    else if (diff === 0)       pill = `<div class="countdown soon">Today!</div>`;
+    else                       pill = `<div class="countdown past">Completed ✓</div>`;
+
+    container.innerHTML += `
+      <div class="exam-card ${ex.code}">
+        <div class="card-date-badge">
+          <div class="badge-day">${ex.day}</div>
+          <div class="badge-month">${ex.month}</div>
+        </div>
+        <div class="card-info">
+          <div class="card-subject">${ex.icon} ${ex.subject}</div>
+          <div class="card-sub">${ex.month === 'APR' ? 'April' : 'May'} ${ex.day}, 2026</div>
+          ${pill}
+        </div>
+      </div>`;
+  });
+</script>
+</body>
+</html>
