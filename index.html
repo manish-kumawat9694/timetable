@@ -86,10 +86,7 @@
   .hero-date { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
   .hero-date strong { color: var(--gold); }
 
-  /* countdown blocks */
-  .countdown-blocks {
-    display: flex; gap: 12px; flex-wrap: wrap;
-  }
+  .countdown-blocks { display: flex; gap: 12px; flex-wrap: wrap; }
   .cd-block {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -98,19 +95,9 @@
     text-align: center;
     min-width: 64px;
   }
-  .cd-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px; font-weight: 700;
-    line-height: 1; color: var(--text);
-  }
-  .cd-unit {
-    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--muted); font-weight: 500; margin-top: 3px;
-  }
-  .cd-sep {
-    font-size: 26px; font-weight: 700; color: var(--muted);
-    align-self: center; margin-top: -6px;
-  }
+  .cd-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; line-height: 1; color: var(--text); }
+  .cd-unit { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-top: 3px; }
+  .cd-sep { font-size: 26px; font-weight: 700; color: var(--muted); align-self: center; margin-top: -6px; }
 
   .hero-pill {
     display: inline-flex; align-items: center; gap: 6px;
@@ -126,7 +113,6 @@
     color: #f49595;
     animation: pulse 1.5s infinite;
   }
-
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
 
   .hero-right { flex: 1; display: flex; flex-direction: column; align-items: flex-end; }
@@ -161,19 +147,13 @@
 
   .calendar { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
   .cal-header { display: grid; grid-template-columns: repeat(7, 1fr); background: var(--card); border-bottom: 1px solid var(--border); }
-  .cal-header div {
-    text-align: center; padding: 11px 4px;
-    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--muted); font-weight: 500;
-  }
-  .cal-header div:first-child,
-  .cal-header div:last-child { color: rgba(230,184,74,0.55); }
+  .cal-header div { text-align: center; padding: 11px 4px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .cal-header div:first-child, .cal-header div:last-child { color: rgba(230,184,74,0.55); }
 
   .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
   .cal-day {
     min-height: 86px; border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border); padding: 8px 6px;
-    transition: background 0.2s;
+    border-bottom: 1px solid var(--border); padding: 8px 6px; transition: background 0.2s;
   }
   .cal-day:nth-child(7n) { border-right: none; }
   .cal-day:hover { background: rgba(255,255,255,0.02); }
@@ -187,13 +167,7 @@
     display: flex; align-items: center; justify-content: center;
     font-weight: 700; font-size: 11px;
   }
-  .event {
-    border-radius: 5px; padding: 3px 6px;
-    font-size: 10px; font-weight: 600; margin-top: 3px;
-    line-height: 1.35; white-space: nowrap;
-    overflow: hidden; text-overflow: ellipsis;
-    transition: filter 0.2s; cursor: default;
-  }
+  .event { border-radius: 5px; padding: 3px 6px; font-size: 10px; font-weight: 600; margin-top: 3px; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: filter 0.2s; cursor: default; }
   .event:hover { filter: brightness(1.2); }
   .ev-time { font-size: 9px; color: var(--muted); margin-top: 2px; }
   .ev-maths    { background: rgba(79,156,249,0.18);  color: #7ab8fb; border-left: 2px solid var(--maths); }
@@ -213,7 +187,6 @@
   .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, var(--border), transparent); }
 
   .exam-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
-
   .exam-card {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 14px; padding: 16px 18px;
@@ -238,42 +211,127 @@
   }
   .badge-day   { font-size: 20px; font-weight: 700; line-height: 1; color: var(--text); }
   .badge-month { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-top: 2px; }
-
   .card-info { flex: 1; }
   .card-subject { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
   .card-time { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
-  .card-countdown {
-    font-size: 12px; font-weight: 600;
-    margin-top: 6px; padding: 3px 10px;
-    border-radius: 20px; display: inline-block;
-  }
+  .card-countdown { font-size: 12px; font-weight: 600; margin-top: 6px; padding: 3px 10px; border-radius: 20px; display: inline-block; }
   .cc-upcoming { background: rgba(230,184,74,0.1); border: 1px solid rgba(230,184,74,0.2); color: var(--gold); }
   .cc-soon     { background: rgba(240,107,107,0.15); border: 1px solid rgba(240,107,107,0.3); color: #f49595; }
   .cc-live     { background: rgba(63,182,139,0.2); border: 1px solid rgba(63,182,139,0.4); color: #5dd4a6; animation: pulse 1.5s infinite; }
   .cc-done     { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--muted); }
 
   /* live clock */
-  .live-clock {
-    text-align: center; margin-bottom: 28px;
-    animation: fadeUp 0.6s 0s ease both;
-  }
-  .clock-display {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 6vw, 64px);
-    font-weight: 700; letter-spacing: 2px;
-    color: var(--text); line-height: 1;
-  }
+  .live-clock { text-align: center; margin-bottom: 28px; animation: fadeUp 0.6s 0s ease both; }
+  .clock-display { font-family: 'Playfair Display', serif; font-size: clamp(36px, 6vw, 64px); font-weight: 700; letter-spacing: 2px; color: var(--text); line-height: 1; }
   .clock-date { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* ── PREVIOUS YEAR NOTES ── */
+  .notes-section {
+    margin-top: 56px;
+    animation: fadeUp 0.6s 0.65s ease both;
+  }
+  .notes-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .notes-card:hover {
+    border-color: rgba(230,184,74,0.35);
+    transform: translateY(-2px);
+  }
+  .notes-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--gold), rgba(230,184,74,0.3));
+  }
+  .notes-glow {
+    position: absolute; top: -80px; right: -80px;
+    width: 260px; height: 260px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(230,184,74,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .notes-icon-wrap {
+    width: 62px; height: 62px; border-radius: 16px; flex-shrink: 0;
+    background: rgba(230,184,74,0.1);
+    border: 1px solid rgba(230,184,74,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+  }
+  .notes-body { flex: 1; }
+  .notes-eyebrow {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 5px;
+  }
+  .notes-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 700; margin-bottom: 6px;
+  }
+  .notes-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+  .notes-subjects {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;
+  }
+  .notes-tag {
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px;
+    border: 1px solid;
+  }
+  .notes-tag.maths   { color: #7ab8fb; background: rgba(79,156,249,0.1);  border-color: rgba(79,156,249,0.25); }
+  .notes-tag.edc     { color: #5dd4a6; background: rgba(63,182,139,0.1);  border-color: rgba(63,182,139,0.25); }
+  .notes-tag.electro { color: #b99cf5; background: rgba(155,114,242,0.1); border-color: rgba(155,114,242,0.25); }
+  .notes-tag.quantum { color: #f49595; background: rgba(240,107,107,0.1); border-color: rgba(240,107,107,0.25); }
+  .notes-tag.thermal { color: #f8be7a; background: rgba(245,158,66,0.1);  border-color: rgba(245,158,66,0.25); }
+  .notes-tag.stellar { color: #82e6ec; background: rgba(82,217,224,0.1);  border-color: rgba(82,217,224,0.25); }
+  .notes-tag.flight  { color: #ea8fd3; background: rgba(224,92,187,0.1);  border-color: rgba(224,92,187,0.25); }
+
+  .notes-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold); color: #000;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 700;
+    padding: 10px 20px; border-radius: 12px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+    letter-spacing: 0.3px;
+  }
+  .notes-btn:hover { opacity: 0.88; transform: scale(1.03); }
+  .notes-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  .notes-btn-ghost {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500;
+    padding: 9px 16px; border-radius: 12px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    margin-left: 10px;
+  }
+  .notes-btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .notes-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
 
   @keyframes fadeDown { from { opacity:0; transform:translateY(-18px); } to { opacity:1; transform:none; } }
   @keyframes fadeUp   { from { opacity:0; transform:translateY(14px);  } to { opacity:1; transform:none; } }
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     .next-exam-hero { flex-direction: column; align-items: flex-start; gap: 16px; }
     .hero-right { align-items: flex-start; }
     .countdown-blocks { gap: 8px; }
     .cd-block { min-width: 52px; padding: 8px 10px; }
     .cd-num { font-size: 22px; }
+    .notes-card { flex-direction: column; align-items: flex-start; }
+    .notes-icon-wrap { width: 50px; height: 50px; font-size: 22px; border-radius: 12px; }
   }
 </style>
 </head>
@@ -351,9 +409,50 @@
     <div class="exam-cards" id="exam-cards"></div>
   </div>
 
+  <!-- ── PREVIOUS YEAR NOTES ── -->
+  <div class="notes-section">
+    <div class="section-title">Previous Year Notes</div>
+    <div class="notes-card">
+      <div class="notes-glow"></div>
+      <div class="notes-icon-wrap">📚</div>
+      <div class="notes-body">
+        <div class="notes-eyebrow">📁 Google Drive · Shared Folder</div>
+        <div class="notes-title">Previous Year Question Papers & Notes</div>
+        <div class="notes-desc">
+          Access all previous year materials — question papers, solutions, and revision notes —
+          organized by subject. Use these alongside your current prep for maximum coverage.
+        </div>
+        <div class="notes-subjects">
+          <span class="notes-tag maths">📐 Mathematics</span>
+          <span class="notes-tag edc">⚡ EDC</span>
+          <span class="notes-tag electro">🔬 Electrodynamics</span>
+          <span class="notes-tag quantum">⚛️ Quantum Mech</span>
+          <span class="notes-tag thermal">🌡️ Thermal Physics</span>
+          <span class="notes-tag stellar">🌟 Stellar</span>
+          <span class="notes-tag flight">✈️ Flight</span>
+        </div>
+        <div class="notes-actions">
+          <a class="notes-btn"
+             href="https://drive.google.com/drive/folders/1kgHxRpIpdNkek1X4zlKesf3jeBTer4XW"
+             target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6.28 3h11.44L22 11.5 17.72 21H6.28L2 11.5 6.28 3zm1.16 2L4.5 11.5 7.44 19h9.12l2.94-7.5L16.56 5H7.44z"/>
+            </svg>
+            Open in Google Drive
+          </a>
+          <a class="notes-btn-ghost"
+             href="https://drive.google.com/drive/folders/1kgHxRpIpdNkek1X4zlKesf3jeBTer4XW"
+             target="_blank" rel="noopener noreferrer">
+            🔗 Copy Link
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
+
 <script>
-  // ── DATA ──
   const exams = [
     { year:2026, month:3,  day:29, subject:'Mathematics',       code:'maths',   icon:'📐' },
     { year:2026, month:3,  day:30, subject:'EDC',               code:'edc',     icon:'⚡' },
@@ -364,35 +463,28 @@
     { year:2026, month:4,  day:9,  subject:'Flight',            code:'flight',  icon:'✈️' },
   ];
 
-  const EXAM_START_H = 14, EXAM_START_M = 30; // 2:30 PM
-  const EXAM_END_H   = 17, EXAM_END_M   = 30; // 5:30 PM
+  const EXAM_START_H = 14, EXAM_START_M = 30;
+  const EXAM_END_H   = 17, EXAM_END_M   = 30;
 
   const colorMap = {
     maths:'#4f9cf9', edc:'#3fb68b', electro:'#9b72f2',
     quantum:'#f06b6b', thermal:'#f59e42', stellar:'#52d9e0', flight:'#e05cbb'
   };
 
-  // Returns Date for exam start
-  function examStart(ex) {
-    return new Date(ex.year, ex.month, ex.day, EXAM_START_H, EXAM_START_M, 0);
-  }
-  function examEnd(ex) {
-    return new Date(ex.year, ex.month, ex.day, EXAM_END_H, EXAM_END_M, 0);
-  }
+  function examStart(ex) { return new Date(ex.year, ex.month, ex.day, EXAM_START_H, EXAM_START_M, 0); }
+  function examEnd(ex)   { return new Date(ex.year, ex.month, ex.day, EXAM_END_H,   EXAM_END_M,   0); }
 
-  // ── CALENDAR BUILD ──
   const aprilEv = { 29: exams[0], 30: exams[1] };
   const mayEv   = { 4: exams[2], 6: exams[3], 7: exams[4], 8: exams[5], 9: exams[6] };
 
   function buildMonth(gridId, year, month, startDow, daysInMonth, evMap) {
     const grid = document.getElementById(gridId);
-    const todayReal = new Date();
+    const td = new Date();
     let html = '';
     for (let i = 0; i < startDow; i++) html += '<div class="cal-day empty"></div>';
     for (let d = 1; d <= daysInMonth; d++) {
       const dow = (startDow + d - 1) % 7;
       const isWeekend = dow === 0 || dow === 6;
-      const td = new Date(); // real today
       const isToday = (year === td.getFullYear() && month === td.getMonth() && d === td.getDate());
       const hasExam = !!evMap[d];
       let cls = 'cal-day';
@@ -410,14 +502,13 @@
     grid.innerHTML = html;
   }
 
-  buildMonth('april-grid', 2026, 3, 3, 30, aprilEv); // April 2026 starts on Wednesday (3)
-  buildMonth('may-grid',   2026, 4, 5, 31, mayEv);   // May 2026 starts on Friday (5)
+  buildMonth('april-grid', 2026, 3, 3, 30, aprilEv);
+  buildMonth('may-grid',   2026, 4, 5, 31, mayEv);
 
-  // ── EXAM CARDS ──
   const container = document.getElementById('exam-cards');
   exams.forEach((ex, i) => {
-    const monName = ex.month === 3 ? 'April' : 'May';
-    const monShort = ex.month === 3 ? 'APR' : 'MAY';
+    const monName  = ex.month === 3 ? 'April' : 'May';
+    const monShort = ex.month === 3 ? 'APR'   : 'MAY';
     container.innerHTML += `
       <div class="exam-card ${ex.code}" id="card-${i}">
         <div class="card-date-badge">
@@ -432,7 +523,6 @@
       </div>`;
   });
 
-  // ── HUMAN READABLE countdown text ──
   function humanDiff(totalSec) {
     if (totalSec <= 0) return null;
     const d = Math.floor(totalSec / 86400);
@@ -447,7 +537,6 @@
     return parts.join(' ');
   }
 
-  // ── HERO BLOCKS ──
   function renderHeroBlocks(totalSec) {
     if (totalSec <= 0) return '<div class="cd-block"><div class="cd-num">0</div><div class="cd-unit">sec</div></div>';
     const d = Math.floor(totalSec / 86400);
@@ -465,11 +554,8 @@
     return html;
   }
 
-  // ── MAIN TICK ──
   function tick() {
     const now = new Date();
-
-    // live clock
     const hh = String(now.getHours()).padStart(2,'0');
     const mm = String(now.getMinutes()).padStart(2,'0');
     const ss = String(now.getSeconds()).padStart(2,'0');
@@ -479,14 +565,11 @@
     document.getElementById('clock-date').textContent =
       `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
 
-    // find next exam (first that hasn't ended yet)
-    let nextExam = null;
-    let nextIdx  = -1;
+    let nextExam = null, nextIdx = -1;
     for (let i = 0; i < exams.length; i++) {
       if (now < examEnd(exams[i])) { nextExam = exams[i]; nextIdx = i; break; }
     }
 
-    // update hero
     const hero = document.getElementById('hero');
     if (nextExam) {
       const start = examStart(nextExam);
@@ -502,16 +585,12 @@
         `${monName} ${nextExam.day}, 2026 &nbsp;·&nbsp; <strong>2:30 PM – 5:30 PM</strong>`;
       document.getElementById('hero-icon').textContent = nextExam.icon;
 
-      const cdBlocks = document.getElementById('cd-blocks');
-      const pill     = document.getElementById('hero-pill');
-
       if (isLive) {
-        cdBlocks.innerHTML = renderHeroBlocks(secToEnd);
-        pill.innerHTML = `<div class="hero-pill live">🟢 EXAM IN PROGRESS — ${humanDiff(secToEnd)} remaining</div>`;
+        document.getElementById('cd-blocks').innerHTML = renderHeroBlocks(secToEnd);
+        document.getElementById('hero-pill').innerHTML = `<div class="hero-pill live">🟢 EXAM IN PROGRESS — ${humanDiff(secToEnd)} remaining</div>`;
       } else {
-        cdBlocks.innerHTML = renderHeroBlocks(secToStart);
-        const h = humanDiff(secToStart);
-        pill.innerHTML = `<div class="hero-pill">⏰ ${h} to go</div>`;
+        document.getElementById('cd-blocks').innerHTML = renderHeroBlocks(secToStart);
+        document.getElementById('hero-pill').innerHTML = `<div class="hero-pill">⏰ ${humanDiff(secToStart)} to go</div>`;
       }
     } else {
       document.getElementById('hero-subject').textContent = '🎉 All Exams Complete!';
@@ -521,13 +600,11 @@
       document.getElementById('hero-icon').textContent = '🏆';
     }
 
-    // update each card countdown
     exams.forEach((ex, i) => {
       const start = examStart(ex);
       const end   = examEnd(ex);
       const el    = document.getElementById(`cc-${i}`);
       if (!el) return;
-
       if (now >= end) {
         el.className = 'card-countdown cc-done';
         el.textContent = '✓ Completed';
@@ -541,11 +618,7 @@
         const hrs   = Math.floor((secTo % 86400) / 3600);
         const mins  = Math.floor((secTo % 3600) / 60);
         const secs  = Math.floor(secTo % 60);
-        let label = '';
-        if (days > 0) label = `${days}d ${hrs}h ${mins}m ${secs}s`;
-        else if (hrs > 0) label = `${hrs}h ${mins}m ${secs}s`;
-        else label = `${mins}m ${secs}s`;
-
+        let label = days > 0 ? `${days}d ${hrs}h ${mins}m ${secs}s` : hrs > 0 ? `${hrs}h ${mins}m ${secs}s` : `${mins}m ${secs}s`;
         if (secTo < 86400) {
           el.className = 'card-countdown cc-soon';
           el.textContent = `⚠️ ${label} to go`;
